@@ -31,7 +31,7 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
-    // get data
+    // get data for my orders
     app.get('/myOrders', async (req, res) => {
       const email = req.query.email;
       const query = { email: email };
@@ -40,6 +40,15 @@ async function run() {
       res.json(result);
       console.log(result);
     });
+
+    // get data for manage orders
+    app.get('/manageOrders', async (req, res) => {
+      const cursor = ordersCollection.find({});
+      const result = await cursor.toArray();
+      res.json(result);
+      console.log(result);
+    });
+
     // get review
     app.get('/allReviews', async (req, res) => {
       const cursor = reviewCollection.find({});
@@ -47,7 +56,6 @@ async function run() {
       res.json(result);
       console.log(result);
     });
-
     // post data
     app.post('/watches', async (req, res) => {
       const placeOrder = req.body;

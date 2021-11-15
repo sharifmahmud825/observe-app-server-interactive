@@ -33,8 +33,9 @@ async function run() {
     });
     // get data
     app.get('/myOrders', async (req, res) => {
-      console.log('hello');
-      const cursor = ordersCollection.find({});
+      const email = req.query.email;
+      const query = { email: email };
+      const cursor = ordersCollection.find(query);
       const result = await cursor.toArray();
       res.json(result);
       console.log(result);

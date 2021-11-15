@@ -56,6 +56,13 @@ async function run() {
       res.json(result);
       console.log(result);
     });
+    // get review
+    app.get('/allReviews', async (req, res) => {
+      const cursor = reviewCollection.find({});
+      const result = await cursor.toArray();
+      res.json(result);
+      console.log(result);
+    });
     // post data
     app.post('/watches', async (req, res) => {
       const placeOrder = req.body;
@@ -67,6 +74,13 @@ async function run() {
     app.post('/review', async (req, res) => {
       const reviews = req.body;
       const result = await reviewCollection.insertOne(reviews);
+      res.json(result);
+      console.log(result);
+    });
+    // post review
+    app.post('/addProduct', async (req, res) => {
+      const watches = req.body;
+      const result = await watchesCollection.insertOne(watches);
       res.json(result);
       console.log(result);
     });

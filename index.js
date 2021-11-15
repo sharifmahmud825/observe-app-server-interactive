@@ -24,17 +24,33 @@ async function run() {
     const database = client.db('observe-db');
     const watchesCollection = database.collection('watchesCollection');
     const ordersCollection = database.collection('orders');
+    const reviewCollection = database.collection('review');
     // get data from database
     app.get('/watches', async (req, res) => {
       const cursor = watchesCollection.find({});
       const result = await cursor.toArray();
       res.send(result);
     });
+    // get data
+    app.get('/myOrders', async (req, res) => {
+      console.log('hello');
+      const cursor = ordersCollection.find({});
+      const result = await cursor.toArray();
+      res.json(result);
+      console.log(result);
+    });
 
     // post data
     app.post('/watches', async (req, res) => {
       const placeOrder = req.body;
       const result = await ordersCollection.insertOne(placeOrder);
+      res.json(result);
+      console.log(result);
+    });
+    // post review
+    app.post('/review', async (req, res) => {
+      const reviews = req.body;
+      const result = await reviewCollection.insertOne(reviews);
       res.json(result);
       console.log(result);
     });

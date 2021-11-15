@@ -40,7 +40,7 @@ async function run() {
       console.log(result);
     });
     // get review
-    app.get('/testimonial', async (req, res) => {
+    app.get('/allReviews', async (req, res) => {
       const cursor = reviewCollection.find({});
       const result = await cursor.toArray();
       res.json(result);
